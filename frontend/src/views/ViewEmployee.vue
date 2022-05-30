@@ -52,7 +52,11 @@ export default {
     // Component mount
     var employeeID = this.$route.params.id;
 
-    this.employee = await employeeAPI.getById(employeeID);
+    try {
+      this.employee = await employeeAPI.getById(employeeID);
+    } catch (e) {
+      this.$router.push(`/notfound`);
+    }
   },
   methods: {
     async updateEmployee() {

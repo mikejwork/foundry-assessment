@@ -132,8 +132,12 @@ export default {
     // Component mount
     var engagementID = this.$route.params.id;
 
-    this.engagement = await engagementAPI.getById(engagementID);
-    this.engagement.status = this.getEngagementStatus(this.engagement);
+    try {
+      this.engagement = await engagementAPI.getById(engagementID);
+      this.engagement.status = this.getEngagementStatus(this.engagement);
+    } catch (e) {
+      this.$router.push(`/notfound`);
+    }
   },
   methods: {
     async updateEngagement() {

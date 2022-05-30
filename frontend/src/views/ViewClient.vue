@@ -48,7 +48,11 @@ export default {
     // Component mount
     var clientID = this.$route.params.id;
 
-    this.client = await clientAPI.getById(clientID);
+    try {
+      this.client = await clientAPI.getById(clientID);
+    } catch (e) {
+      this.$router.push(`/notfound`);
+    }
   },
   methods: {
     async updateClient() {
