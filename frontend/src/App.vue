@@ -1,55 +1,82 @@
+<style module>
+.index {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.navigation {
+  width: 30ex;
+  height: 100%;
+  color: white;
+  padding: 2ex;
+  background-color: #0f0f0f;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation > p {
+  color: grey;
+  font-size: 9pt;
+}
+
+.navigation > hr {
+  opacity: 0.2;
+  margin-bottom: 1ex;
+}
+
+.navigation > span {
+  cursor: pointer;
+  color: grey;
+  font-weight: 500;
+  margin: 1ex 0ex 1ex 0ex;
+}
+
+.navigation > span:hover {
+  filter: brightness(1.2);
+}
+
+.navigation > span:active {
+  filter: brightness(0.8);
+}
+
+.content {
+  padding: 3ex;
+  width: 100%;
+}
+</style>
+
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+    <div :class="$style.index">
+      <div :class="$style.navigation">
+        <h3>Blackbook Foundry</h3>
+        <p>Client engagement manager</p>
+        <hr />
+        <span @click="navigate('/')">Home</span>
+        <span @click="navigate('/employees')">Employees</span>
+        <span @click="navigate('/clients')">Clients</span>
+        <span @click="navigate('/engagements')">Engagements</span>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
+      <div :class="$style.content">
+        <router-view />
+      </div>
+    </div>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 
-  data: () => ({
-    //
-  }),
+  data() {
+    return {};
+  },
+  methods: {
+    navigate(page) {
+      if (page !== this.$route.path) this.$router.push(page);
+    },
+  },
 };
 </script>
